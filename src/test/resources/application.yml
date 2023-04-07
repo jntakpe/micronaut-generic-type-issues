@@ -1,0 +1,14 @@
+test-resources:
+  containers:
+    mockserver:
+      image-name: mockserver/mockserver:5.15.0
+      hostnames:
+        - tc.mockserver.host
+      exposed-ports:
+        - tc.mockserver.port: 1080
+      wait-strategy:
+        port:
+        log:
+          regex: ".*started.*"
+dummy:
+  url: http://${tc.mockserver.host}:${tc.mockserver.port}
